@@ -1,38 +1,203 @@
-.App {
-  text-align: center;
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: sans-serif;
+  /* Place bitcoin-wallpaper.png in the public folder */
+  background: url('./bitcoin-wallpaper.png') center/cover no-repeat;
+}
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.card {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(3px);
+  /* background: #000;  */
+  color: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  width: 1200px;    /* fixed width */
+  height: 700px;   /* fixed height */
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 0 10px rgba(255,255,255,0.05);
+}
+.card h1 {
+  text-align: center;   /* Center the title */
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+.datetime-picker {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 1rem 0;
+}
+.datetime-picker input[type="date"],
+.datetime-picker input[type="time"] {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  color: #000;
+  font-size: 1rem;
+}
+button {
+  width: 200px;      /* fixed length */
+  align-self: center;/* center button */
+  padding: 0.75rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  border: none;
+  border-radius: 8px;
+  background: #4e91f2;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.results-panel {
+  display: flex;
+  margin-top: 1rem;
+  flex: 1;
+  width: 100%;
+  height: 400px;  /* fixed height for panel */
+}
+.main-chart {
+  flex: 3;
+  background: rgba(252, 252, 252, 0.8);
+  border-radius: 8px;
+  margin-right: 1rem;
+  height: 100%;   /* fill panel height */
+}
+.main-chart.placeholder {
+  /* empty placeholder with same size */
+  background: rgba(255,255,255,0.05);
+}
+.trends-sidebar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.trend-card {
+  background: #fff;
+  color: #000;
+  padding: 0.2px;      /* title flush at top */
+  border-radius: 12px;
+  width: 100%;
+  height: 154px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.trend-card h4 {
+  margin: 10px;
+  padding: 0;
+  font-size: 1rem;
+  align-self: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.trend-chart {
+  flex: 1 1 auto;           /* fill remaining height */
+  min-height: 0;
+  width: 100%;
+}
+
+/* Wrap the chart to add horizontal breathing room and centering */
+.price-chart-wrapper {
+  width: 100%;
+  padding: 2.5rem 1rem 0;   /* 1.5rem top padding, 1rem sides, 0 bottom */
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;   /* center chart horizontally */
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+}
+
+/* Optionally, make the chart’s background a bit darker */
+/* .price-chart-wrapper .recharts-wrapper {
+  background: rgba(0,0,0,0.1);
+  border-radius: 6px;
+} */
+
+/* Wrap table so it sits neatly under the chart */
+.stats-table-wrapper {
+  flex: 0 0 75%;   /* fixed 25% width */
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Stylish stats table */
+.stats-table {
+  border-collapse: collapse;
+  width: 80%;
+  background: rgba(233, 211, 211, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.stats-table th,
+.stats-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  color: #000000;
+  font-size: 0.95rem;
+}
+
+.stats-table th {
+  background: rgba(255, 255, 255, 0.15);
+  font-weight: 600;
+}
+
+.stats-table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.stats-row {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  margin-left: 5rem;
+}
+
+/* Status block */
+.status-block {
+  flex: 0 25%;   /* fixed 25% width */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 0.5rem;
+  border-radius: 8px;
 }
 
-.App-link {
-  color: #61dafb;
+.status-block.buy {
+  background: rgba(46, 204, 113, 0.2); /* light green */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.status-block.hold {
+  background: rgba(231, 76, 60, 0.2);  /* light red */
+}
+
+.status-icon {
+  font-size: 2rem;
+}
+
+.status-text {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-top: 0.25rem;
 }
