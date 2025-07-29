@@ -22,7 +22,7 @@ function App() {
     setPredicting(true);
     const datetime = `${date} ${time}:00`;
     try {
-      const resp = await axios.get('http://127.0.0.1:5000/predict', {
+      const resp = await axios.get('http://127.0.0.1:5001/btc/predict', {
         params: { datetime }
       });
       setResult(resp.data);

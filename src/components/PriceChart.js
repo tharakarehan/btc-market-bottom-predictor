@@ -39,8 +39,8 @@ export default function PriceChart({ real, predicted, bestIndex }) {
           />
            <YAxis
             domain={[
-              dataMin => dataMin - Math.trunc(dataMin*0.2),
-              dataMax => dataMax + Math.trunc(dataMax*0.1)
+              dataMin => dataMin - Math.trunc(20),
+              dataMax => dataMax + Math.trunc(20)
             ]}
             axisLine={{ stroke: '#333', strokeWidth: 1 }}
             tickLine={false}
