@@ -46,6 +46,7 @@ export default function PriceChart({ real, predicted, bestIndex }) {
             tickLine={false}
             tick={{ fill: '#333', fontSize: 12 }}
             width={40}
+            tickFormatter={(value) => value.toFixed(2)}
           />
 
           <Tooltip
